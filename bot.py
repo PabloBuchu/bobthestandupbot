@@ -8,7 +8,6 @@ from dotenv import load_dotenv
 
 from slackclient import SlackClient
 
-
 EventMapping = Dict[str, str]
 
 logger = logging.getLogger(__name__)
@@ -22,7 +21,7 @@ STANDUP_CHANNELS = {}
 
 
 @dataclass
-class Command(object):
+class Command:
     validator = None
 
     input: str
@@ -75,7 +74,7 @@ class StartStandupCommand(Command):
                 3. What are your plans for later?
                 """
             )
-            STANDUP_CHANNELS[channel_id] = {'origin': self.channel,  'author': email, 'response': []}
+            STANDUP_CHANNELS[channel_id] = {'origin': self.channel, 'author': email, 'response': []}
 
         slack_client.api_call(
             "chat.postMessage",
